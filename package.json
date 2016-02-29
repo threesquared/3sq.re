@@ -1,0 +1,47 @@
+{
+  "name": "3sq.re",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "concurrent \"npm run tsc:w\" \"npm run sass\" \"npm run sass:w\" \"npm run lite\" ",
+    "test": "npm run tsc || true && ./node_modules/.bin/karma start",
+    "tsc": "tsc",
+    "tsc:w": "tsc -w",
+    "lite": "lite-server",
+    "typings": "typings",
+    "postinstall": "typings install",
+    "remap": "./node_modules/.bin/remap-istanbul -i ./coverage/coverage-final.json -o ./coverage/lcov.info -t lcovonly",
+    "coveralls": "npm run remap && node ./node_modules/coveralls/bin/coveralls.js < ./coverage/lcov.info",
+    "sass": "node-sass scss/style.scss --output css --source-map true --output-style compressed",
+    "sass:w": "npm run sass -- --watch=\"scss\" -r"
+  },
+  "license": "ISC",
+  "private": true,
+  "dependencies": {
+    "angular2": "2.0.0-beta.7",
+    "bootstrap-sass": "^3.3.6",
+    "es6-promise": "^3.0.2",
+    "es6-shim": "^0.33.3",
+    "ng2-disqus": "^1.0.0",
+    "ng2-prism": "^2.1.7",
+    "reflect-metadata": "0.1.2",
+    "rxjs": "5.0.0-beta.2",
+    "systemjs": "0.19.22",
+    "zone.js": "0.5.15"
+  },
+  "devDependencies": {
+    "concurrently": "^2.0.0",
+    "coveralls": "^2.11.8",
+    "jasmine-core": "^2.4.1",
+    "karma": "^0.13.21",
+    "karma-chrome-launcher": "^0.2.2",
+    "karma-coverage": "^0.5.4",
+    "karma-es6-shim": "^0.2.3",
+    "karma-firefox-launcher": "^0.1.7",
+    "karma-jasmine": "^0.3.7",
+    "lite-server": "^2.1.0",
+    "node-sass": "^3.4.2",
+    "remap-istanbul": "^0.5.1",
+    "typescript": "^1.7.5",
+    "typings": "^0.6.8"
+  }
+}
