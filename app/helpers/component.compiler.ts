@@ -5,9 +5,9 @@ import { Php } from 'ng2-prism/languages';
 export function toComponent(template) {
 
   @Component({
-  	selector: 'compiled-component',
-  	template: template,
-  	directives: [Codeblock, Php]
+    selector: 'compiled-component',
+    template: template,
+    directives: [Codeblock, Php]
   })
 
   class CompiledComponent {}

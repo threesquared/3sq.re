@@ -4,7 +4,7 @@ import { Title } from 'angular2/platform/browser';
 
 @Component({
   selector: 'lost',
-  bindings: [Title,],
+  bindings: [Title],
   directives: [ROUTER_DIRECTIVES],
   templateUrl: 'app/templates/lost.html',
 })
@@ -12,7 +12,7 @@ import { Title } from 'angular2/platform/browser';
 export class LostComponent {
 
   constructor(
-    private _title:Title)
+    private _title: Title)
   {}
 
   ngOnInit() {

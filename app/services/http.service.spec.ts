@@ -76,7 +76,7 @@ describe('Http Service', () => {
 
     let observable = Observable.of({items: [{id: 1}]});
 
-    let hydrator = (data) => { return new TestClass(data.id); }
+    let hydrator = (data) => { return new TestClass(data.id); };
 
     httpService.mapResults(observable, hydrator).subscribe(data => {
       expect(data.length).toBe(1);
@@ -90,7 +90,7 @@ describe('Http Service', () => {
 
     let observable = Observable.of([{id: 1}]);
 
-    let hydrator = (data) => { return new TestClass(data.id); }
+    let hydrator = (data) => { return new TestClass(data.id); };
 
     httpService.mapResult(observable, hydrator).subscribe(data => {
       expect(data instanceof TestClass).toBeTruthy();

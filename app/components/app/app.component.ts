@@ -36,8 +36,4 @@ export class AppComponent {
     });
   }
 
-  scrollTo(section: string): void {
-    this._router.navigate(['Home']);
-  }
-
 }

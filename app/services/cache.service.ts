@@ -15,12 +15,12 @@ export class CacheService {
   checkCache(key: string, callback: () => Observable<any>): Observable<any> {
     return Observable.create(observer => {
       if (this._check(key)) {
-        observer.next(this._get(key))
+        observer.next(this._get(key));
       } else {
         callback().subscribe((results: Array<any>) => {
           this._put(key, results);
-          observer.next(results)
-          observer.complete()
+          observer.next(results);
+          observer.complete();
         });
       }
     });

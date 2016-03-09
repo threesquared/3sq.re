@@ -15,7 +15,7 @@ import { Post } from '../../models/post';
   templateUrl: 'app/templates/blog.html',
 })
 
-export class BlogComponent  implements OnActivate, OnDeactivate {
+export class BlogComponent implements OnActivate, OnDeactivate {
 
   public page: number = 1;
   public posts: Array<Post> = [];
@@ -25,17 +25,17 @@ export class BlogComponent  implements OnActivate, OnDeactivate {
   constructor(
     private _wordpressService: WordpressService,
     private _routeParams: RouteParams,
-    private _title:Title)
+    private _title: Title)
   {}
 
   routerOnActivate(next: ComponentInstruction, prev: ComponentInstruction) {
-    if(prev && prev.componentType.name == 'PostComponent') {
+    if (prev && prev.componentType.name === 'PostComponent') {
       this.enter = true;
     }
   }
 
   routerOnDeactivate(next: ComponentInstruction, prev: ComponentInstruction) {
-    if(next.componentType.name == 'PostComponent') {
+    if (next.componentType.name === 'PostComponent') {
       this.enter = false;
       this.leave = true;
       return Observable.of(true).delay(300).toPromise();
@@ -44,11 +44,12 @@ export class BlogComponent  implements OnActivate, OnDeactivate {
 
   ngOnInit() {
     this._title.setTitle("3sq.re - Blog");
-    if(this._routeParams.get('page')) {
-      this.page = +this._routeParams.get('page');
+    let page = this._routeParams.get('page');
+    if (page) {
+      this.page = +page;
     }
     this._wordpressService.getPosts(this.page).subscribe((posts: Array<Post>) => {
-      this.posts = posts
+      this.posts = posts;
     });
   }
 }

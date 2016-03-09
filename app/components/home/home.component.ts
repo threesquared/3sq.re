@@ -1,5 +1,5 @@
 import { Component, OnInit } from 'angular2/core';
-import { Router, ROUTER_DIRECTIVES } from 'angular2/router';
+import { RouteParams, ROUTER_DIRECTIVES } from 'angular2/router';
 import { Title } from 'angular2/platform/browser';
 
 import { WordpressService } from '../../services/wordpress.service';
@@ -30,11 +30,15 @@ export class HomeComponent {
   constructor(
     private _wordpressService: WordpressService,
     private _githubService: GithubService,
-    private _router:Router,
+    private _routeParams: RouteParams,
     private _title: Title)
   {}
 
   ngOnInit() {
+    let section = this._routeParams.get('s');
+    if (section) {
+      this.scrollTo(section);
+    }
     this._title.setTitle("3sq.re - Ben Speakman's portfolio");
     this.birthday = new Date('1988-04-09');
     this.age = this._calculateAge(this.birthday);

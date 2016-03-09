@@ -1,7 +1,7 @@
 import { Injectable } from 'angular2/core';
 import { Observable } from 'rxjs/Observable';
 import { Http, HTTP_PROVIDERS, Response } from 'angular2/http';
-import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/map';
 
 import { CacheService } from './cache.service';
 
@@ -29,7 +29,7 @@ export class HttpService {
             () => observer.complete()
           );
       });
-    })
+    });
   }
 
   /**
@@ -40,9 +40,9 @@ export class HttpService {
    */
   mapResults(observable: Observable<any>, hydrator: (item) => any): Observable<any> {
     return observable.map((results: { items?; }) => {
-      let result:Array<any> = [];
+      let result: Array<any> = [];
       if (results) {
-        let items:Array<any> = results.items ? results.items : results
+        let items: Array<any> = results.items ? results.items : results;
         items.forEach((item) => {
           result.push(hydrator(item));
         });

@@ -24,7 +24,7 @@ import { toComponent } from '../../helpers/component.compiler';
 
   return new Promise((resolve) => {
     _wordpressService.getPost(to.params['slug']).subscribe((post: Post) => {
-      to.routeData.data['post'] = post
+      to.routeData.data['post'] = post;
       resolve(true);
     });
   });
@@ -39,7 +39,7 @@ export class PostComponent implements OnActivate, OnDeactivate {
   constructor(
     private _wordpressService: WordpressService,
     private _routeData: RouteData,
-    private _title:Title,
+    private _title: Title,
     private _loader: DynamicComponentLoader,
     private _elementRef: ElementRef)
   {
@@ -47,13 +47,13 @@ export class PostComponent implements OnActivate, OnDeactivate {
   }
 
   routerOnActivate(next: ComponentInstruction, prev: ComponentInstruction) {
-    if(prev && prev.componentType.name == 'BlogComponent') {
+    if (prev && prev.componentType.name === 'BlogComponent') {
       this.enter = true;
     }
   }
 
   routerOnDeactivate(next: ComponentInstruction, prev: ComponentInstruction) {
-    if(next.componentType.name == 'BlogComponent') {
+    if (next.componentType.name === 'BlogComponent') {
       this.enter = false;
       this.leave = true;
       return Observable.of(true).delay(300).toPromise();
@@ -66,6 +66,6 @@ export class PostComponent implements OnActivate, OnDeactivate {
       toComponent(this.post.getContent()),
       this._elementRef,
       'content'
-    )
+    );
   }
 }
