@@ -29,8 +29,8 @@ export class AppComponent {
   {
     _router.recognize(_location.path()).then((instruction: Instruction) => {
       if (!instruction) {
-         _router.recognize('/404').then((instruction: Instruction) => {
-           _router.navigateByInstruction(instruction, true);
+         _router.recognize('/404').then((lostInstruction: Instruction) => {
+           _router.navigateByInstruction(lostInstruction, true);
         });
       }
     });

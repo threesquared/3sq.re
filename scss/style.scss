@@ -6,8 +6,10 @@
 @import "./../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins/vendor-prefixes";
 @import "./../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins/center-block";
 @import "./../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins/hide-text";
+@import "./../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins/responsive-visibility";
 @import "./../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/grid";
 @import "./../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/utilities";
+@import "./../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/responsive-utilities";
 
 .sprite {
   background: url(/img/sprite.png);
