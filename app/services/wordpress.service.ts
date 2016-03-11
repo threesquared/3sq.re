@@ -17,7 +17,7 @@ export class WordpressService {
    * @return {Observable}
    */
   getProjects(): Observable<any> {
-    let results = this.httpService.getUrl(this.endpoint + '/posts?filter[posts_per_page]=5&filter[category_name]=Projects');
+    let results = this.httpService.getUrl(`${this.endpoint}/posts?filter[posts_per_page]=5&filter[category_name]=Projects`);
     return this.httpService.mapResults(results, this._hydratePost);
   }
 
@@ -26,7 +26,7 @@ export class WordpressService {
    * @return {Observable}
    */
   getSnippets(): Observable<any> {
-    let results = this.httpService.getUrl(this.endpoint + '/posts?filter[posts_per_page]=5&filter[category_name]=Snippets');
+    let results = this.httpService.getUrl(`${this.endpoint}/posts?filter[posts_per_page]=5&filter[category_name]=Snippets`);
     return this.httpService.mapResults(results, this._hydratePost);
   }
 
@@ -35,7 +35,7 @@ export class WordpressService {
    * @return {Observable}
    */
   getLatestPost(): Observable<any> {
-    let result = this.httpService.getUrl(this.endpoint + '/posts?filter[posts_per_page]=1');
+    let result = this.httpService.getUrl(`${this.endpoint}/posts?filter[posts_per_page]=1`);
     return this.httpService.mapResult(result, this._hydratePost);
   }
 
@@ -45,7 +45,7 @@ export class WordpressService {
    * @return {Observable}
    */
   getPost(slug: string): Observable<any> {
-    let result = this.httpService.getUrl(this.endpoint + '/posts?filter[name]=' + slug);
+    let result = this.httpService.getUrl(`${this.endpoint}/posts?filter[name]=${slug}`);
     return this.httpService.mapResult(result, this._hydratePost);
   }
 
@@ -55,7 +55,7 @@ export class WordpressService {
    * @return {Observable}
    */
   getPosts(page: number = 1): Observable<any> {
-    let results = this.httpService.getUrl(this.endpoint + '/posts?filter[posts_per_page]=5&page=' + page);
+    let results = this.httpService.getUrl(`${this.endpoint}/posts?filter[posts_per_page]=5&page=${page}`);
     return this.httpService.mapResults(results, this._hydratePost);
   }
 

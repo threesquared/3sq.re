@@ -18,7 +18,7 @@ export class Post {
   }
 
   getUrl() {
-    return '/' + this.date.getFullYear() + '/' + this.date.getMonth() + '/' + this.slug;
+    return `/${this.date.getFullYear()}/${this.date.getMonth()}/${this.slug}`;
   }
 
   getExcerpt() {

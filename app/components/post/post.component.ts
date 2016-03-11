@@ -61,7 +61,7 @@ export class PostComponent implements OnActivate, OnDeactivate {
   }
 
   ngOnInit() {
-    this._title.setTitle("3sq.re - " + this.post.title);
+    this._title.setTitle(`3sq.re - ${this.post.title}`);
     this._loader.loadIntoLocation(
       toComponent(this.post.getContent()),
       this._elementRef,

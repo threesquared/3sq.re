@@ -18,7 +18,7 @@ export class GithubService {
    * @return {Observable}
    */
   getRepositories(): Observable<any> {
-    let results = this.httpService.getUrl(this.endpoint + '/search/repositories?q=user:threesquared&sort=stars&order=desc&per_page=5');
+    let results = this.httpService.getUrl(`${this.endpoint}/search/repositories?q=user:threesquared&sort=stars&order=desc&per_page=5`);
     return this.httpService.mapResults(results, this._hydrateRepository);
   }
 
@@ -27,7 +27,7 @@ export class GithubService {
    * @return {Observable}
    */
   getPullRequests(): Observable<any> {
-    let results = this.httpService.getUrl(this.endpoint + '/search/issues?q=author:threesquared type:pr is:public state:closed&sort=created&order=desc&per_page=5');
+    let results = this.httpService.getUrl(`${this.endpoint}/search/issues?q=author:threesquared type:pr is:public state:closed&sort=created&order=desc&per_page=5`);
     return this.httpService.mapResults(results, this._hydrateIssue);
   }
 
