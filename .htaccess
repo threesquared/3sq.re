@@ -6,9 +6,9 @@
     RewriteEngine On
 
     # Remove www
-    RewriteCond %{HTTP_HOST} !^3sq\.re$ [NC]
-    RewriteCond %{HTTP_HOST} !^3sq\.local:8080$ [NC]
-    RewriteRule ^(.*) http://3sq.re/$1 [L,R=301]
+    # RewriteCond %{HTTP_HOST} !^3sq\.re$ [NC]
+    # RewriteCond %{HTTP_HOST} !^3sq\.local:8080$ [NC]
+    # RewriteRule ^(.*) http://3sq.re/$1 [L,R=301]
 
     # Redirect Trailing Slashes...
     RewriteRule ^(.*)/$ /$1 [L,R=301]
