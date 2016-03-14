@@ -46,7 +46,7 @@ module.exports = function(config) {
         reporters: ['progress', 'dots', 'coverage'],
 
         preprocessors: {
-            'app/**/!(*spec).js': ['coverage']
+            'app/**/!(*spec|main|app.injector).js': ['coverage']
         },
 
         coverageReporter: {
