@@ -6,7 +6,7 @@
     "url": "https://github.com/threesquared/3sq.re.git"
   },
   "scripts": {
-    "postinstall": "HOME=$OPENSHIFT_DATA_DIR typings install",
+    "postinstall": "typings install",
     "watch": "webpack --watch",
     "prebuild": "rimraf dist",
     "build": "webpack",
@@ -28,13 +28,15 @@
     "@angular/platform-browser": "2.0.0-rc.4",
     "@angular/platform-browser-dynamic": "2.0.0-rc.4",
     "@angular/platform-server": "2.0.0-rc.4",
-    "@angular/router": "3.0.0-alpha.8",
+    "@angular/router": "3.0.0-beta.1",
     "angular2-universal": "~0.104.5",
-    "parse5": "^1.5.0",
     "body-parser": "^1.15.1",
     "bootstrap-sass": "^3.3.6",
     "express": "^4.14.0",
     "methods": "~1.1.2",
+    "ng2-disqus": "file:///Users/ben/Projects/ng2-disqus",
+    "ng2-page-scroll": "^1.2.1",
+    "parse5": "^1.5.0",
     "preboot": "^2.1.2",
     "rxjs": "5.0.0-beta.6"
   },
