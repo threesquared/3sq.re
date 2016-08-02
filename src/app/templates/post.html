@@ -7,6 +7,6 @@
 			<div class="postdate">Posted on {{ post.date | date:'yMMMMd' }} by <span itemprop="author">{{ post.author }}</span></div>
 			<div class="postcontent" itemprop="articleBody" [innerHTML]="post.content"></div>
 		</div>
-
+		<disqus [shortname]="'threesquared'" [identifier]="post.id"></disqus>
 	</div>
 </div>

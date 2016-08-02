@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, Renderer, Inject } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { ROUTER_DIRECTIVES, ActivatedRoute } from '@angular/router';
+import { Disqus } from 'ng2-disqus/disqus';
 
 import { SeoHelper } from '../../helpers/seo.helper';
 import { WordpressService } from '../../services/wordpress.service';
@@ -8,7 +9,7 @@ import { Post } from '../../models/post';
 
 @Component({
   selector: 'post',
-  directives: [ROUTER_DIRECTIVES, NgClass],
+  directives: [ROUTER_DIRECTIVES, NgClass, Disqus],
   templateUrl: '../../templates/post.html',
 })
 

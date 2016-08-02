@@ -7,8 +7,10 @@ import * as cookieParser from 'cookie-parser';
 
 import { enableProdMode } from '@angular/core';
 import { expressEngine } from 'angular2-universal';
+import { setGlobal } from 'angular2-universal/dist/node/mock/window';
 
 enableProdMode();
+setGlobal();
 
 const app = express();
 const port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
