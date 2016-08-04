@@ -13,7 +13,7 @@
 
 		<div *ngIf="posts.length > 0" class="col-md-9">
 
-			<article *ngFor="#post of posts" id="post-{{ post.id }}" class="post">
+			<article *ngFor="let post of posts" id="post-{{ post.id }}" class="post">
 				<h2 class="posttitle">
 					<a [routerLink]="['/blog/', post.getYear(), post.getMonth(), post.slug]">{{ post.title }}</a>
 				</h2>
