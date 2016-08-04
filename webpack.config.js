@@ -17,7 +17,13 @@ var commonConfig = {
         ]
     },
     plugins: [
-        new webpack.optimize.OccurenceOrderPlugin(true)
+        new webpack.optimize.OccurenceOrderPlugin(true),
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+            output: {
+                comments: false
+            }
+        })
     ],
     devtool: 'source-map'
 };

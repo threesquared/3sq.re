@@ -41,7 +41,9 @@ export function ngApp(req, res) {
       SeoHelper
     ],
     async: true,
-    preboot: false
+    preboot: {
+      appRoot: 'app'
+    }
   };
 
   res.render('index', config);
