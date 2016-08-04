@@ -1,6 +1,6 @@
-import { Component, OnInit, Renderer, Inject } from '@angular/core';
-import { Router, ROUTER_DIRECTIVES} from '@angular/router';
-import { PageScroll, PageScrollConfig } from 'ng2-page-scroll';
+import { Component, OnInit, } from '@angular/core';
+import { ROUTER_DIRECTIVES} from '@angular/router';
+import { PageScrollConfig } from 'ng2-page-scroll';
 
 import { SeoHelper } from '../../helpers/seo.helper';
 import { WordpressService } from '../../services/wordpress.service';
@@ -29,8 +29,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private _wordpressService: WordpressService,
     private _githubService: GithubService,
-    private _seoHelper: SeoHelper,
-    private renderer: Renderer
+    private _seoHelper: SeoHelper
   ) {
     PageScrollConfig.defaultDuration = 500;
   }

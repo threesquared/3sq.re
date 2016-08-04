@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Renderer, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { ROUTER_DIRECTIVES, ActivatedRoute } from '@angular/router';
 import { Disqus } from 'ng2-disqus/disqus';
@@ -21,8 +21,7 @@ export class PostComponent implements OnInit, OnDestroy {
   constructor(
     private _route: ActivatedRoute,
     private _wordpressService: WordpressService,
-    private _seoHelper: SeoHelper,
-    private renderer: Renderer) {}
+    private _seoHelper: SeoHelper) {}
 
   public ngOnInit() {
     this.sub = this._route.params.subscribe(params => {

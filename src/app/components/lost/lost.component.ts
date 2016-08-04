@@ -9,7 +9,7 @@ import { SeoHelper } from '../../helpers/seo.helper';
   templateUrl: '../../templates/lost.html',
 })
 
-export class LostComponent {
+export class LostComponent implements OnInit {
 
   constructor(
     private _seoHelper: SeoHelper

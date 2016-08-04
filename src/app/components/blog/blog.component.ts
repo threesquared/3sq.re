@@ -1,7 +1,6 @@
-import { Component, OnInit, OnDestroy, Renderer, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { ROUTER_DIRECTIVES, ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs/Rx';
 
 import { SeoHelper } from '../../helpers/seo.helper';
 import { WordpressService } from '../../services/wordpress.service';
@@ -22,8 +21,7 @@ export class BlogComponent implements OnInit, OnDestroy {
   constructor(
     private _route: ActivatedRoute,
     private _wordpressService: WordpressService,
-    private _seoHelper: SeoHelper,
-    private renderer: Renderer) {}
+    private _seoHelper: SeoHelper) {}
 
   public ngOnInit() {
     this._seoHelper.setMeta('Blog', 'Blog');
