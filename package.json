@@ -34,7 +34,7 @@
     "bootstrap-sass": "^3.3.6",
     "express": "^4.14.0",
     "methods": "~1.1.2",
-    "ng2-disqus": "git+https://github.com/threesquared/ng2-disqus.git",
+    "ng2-disqus": "~2.0.0",
     "ng2-page-scroll": "^1.2.1",
     "parse5": "^1.5.0",
     "preboot": "^2.1.2",
