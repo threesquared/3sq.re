@@ -13,8 +13,8 @@ enableProdMode();
 setGlobal();
 
 const app = express();
-const port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
-const ip = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+const port = process.env.PORT || 3000;
+const ip = process.env.HOST || '0.0.0.0';
 const ROOT = path.join(path.resolve(__dirname, '..'));
 
 app.engine('.html', expressEngine);
@@ -45,5 +45,5 @@ app.get('*', function(req, res) {
 });
 
 app.listen(port, ip, () => {
-  console.log('Listening on: http://localhost:3000');
+  console.log(`Listening on: http://${ip}:${port}`);
 });
