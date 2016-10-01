@@ -14,7 +14,7 @@ setGlobal();
 
 const app = express();
 const port = process.env.PORT || 3000;
-const ip = process.env.HOST || '127.0.0.1';
+const ip = process.env.HOST || '0.0.0.0';
 const ROOT = path.join(path.resolve(__dirname, '..'));
 
 app.engine('.html', expressEngine);
