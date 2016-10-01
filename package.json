@@ -6,7 +6,7 @@
     "url": "https://github.com/threesquared/3sq.re.git"
   },
   "scripts": {
-    "postinstall": "npm run webpack -p && typings install",
+    "postinstall": "typings install && npm run build:prod",
     "watch": "webpack --watch",
     "prebuild": "rimraf dist",
     "build": "webpack",
