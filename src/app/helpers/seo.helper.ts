@@ -1,10 +1,10 @@
-import { getDOM } from '@angular/platform-browser/src/dom/dom_adapter';
-import { Injectable, Inject } from "@angular/core";
-import { DOCUMENT } from '@angular/platform-browser';
+import { Injectable, Inject, Renderer } from "@angular/core";
+import { __platform_browser_private__ as _, DOCUMENT } from '@angular/platform-browser';
 
 @Injectable()
 export class SeoHelper {
 
+    private dom: any;
     private document: any;
     private headElement: HTMLElement;
     private metaDescription: HTMLElement;
@@ -23,6 +23,7 @@ export class SeoHelper {
     constructor(
         @Inject(DOCUMENT) document
     ) {
+        this.dom = _.getDOM();
         this.document = document;
         this.headElement = this.document.head;
 
@@ -85,14 +86,14 @@ export class SeoHelper {
 
     private getOrCreateElement(name: string, attr: string, type: string = 'meta'): HTMLElement {
         let el: HTMLElement;
-        el = getDOM().createElement(type);
-        getDOM().setAttribute(el, name, attr);
-        getDOM().insertBefore(this.document.head.lastChild, el);
+        el = this.dom.createElement(type);
+        this.dom.setAttribute(el, name, attr);
+        this.dom.insertBefore(this.document.head.lastChild, el);
 
         return el;
     }
 
     private setElementAttribute(el, name, attr) {
-        return getDOM().setAttribute(el, name, attr);
+        return this.dom.setAttribute(el, name, attr);
     }
 }

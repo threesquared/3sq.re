@@ -1,0 +1,10 @@
+{
+  "name": "3sq.re",
+  "repository": "https://github.com/threesquared/3sq.re",
+  "env": {
+    "NPM_CONFIG_PRODUCTION": {
+      "description": "Install `webpack` and other development modules when deploying to allow full builds.",
+      "value": "false"
+    }
+  }
+}

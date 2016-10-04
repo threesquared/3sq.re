@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { SeoHelper } from '../../helpers/seo.helper';
 
 @Component({
   selector: 'lost',
-  directives: [ROUTER_DIRECTIVES],
   templateUrl: '../../templates/lost.html',
 })
 
