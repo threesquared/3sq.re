@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { UniversalModule } from 'angular2-universal';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
 import { Ng2DisqusModule } from 'ng2-disqus';
+import { PageScrollConfig } from 'ng2-page-scroll';
 
 import { AppComponent } from './app/components/app/app.component';
 import { HomeComponent } from './app/components/home/home.component';
@@ -49,5 +50,7 @@ import { SeoHelper } from './app/helpers/seo.helper';
   ]
 })
 export class MainModule {
-
+  constructor() {
+    PageScrollConfig.defaultDuration = 500;
+  }
 }
