@@ -27,8 +27,7 @@ export class HomeComponent implements OnInit {
     private _wordpressService: WordpressService,
     private _githubService: GithubService,
     private _seoHelper: SeoHelper
-  ) {
-  }
+  ) {}
 
   public ngOnInit() {
     this._seoHelper.setMeta('Ben Speakman\'s portfolio', 'Portfolio of Ben Speakman, a talented software engineering graduate and backend PHP developer');

@@ -31,6 +31,7 @@ app.use(bodyParser.json());
 // Serve static files
 app.use('/assets', express.static(path.join(__dirname, 'assets'), {maxAge: 30}));
 app.use(express.static(path.join(ROOT, 'dist/client'), {index: false}));
+app.use(express.static(path.join(ROOT, 'src/public'), {index: false}));
 
 function ngApp(req, res) {
   res.render('index', {
