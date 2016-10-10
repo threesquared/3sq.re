@@ -32,6 +32,10 @@ import { SeoHelper } from './app/helpers/seo.helper';
         component: HomeComponent
       },
       {
+        path: 'prod',
+        component: HomeComponent
+      },
+      {
         path: 'blog',
         component: BlogComponent
       },

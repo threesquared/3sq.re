@@ -1,4 +1,5 @@
 import { Component, OnInit, } from '@angular/core';
+import { isBrowser } from 'angular2-universal';
 
 import { SeoHelper } from '../../helpers/seo.helper';
 import { WordpressService } from '../../services/wordpress.service';
@@ -41,17 +42,21 @@ export class HomeComponent implements OnInit {
    * Get data from wordpress service
    */
   private _getWordpress() {
-    this._wordpressService.getProjects().subscribe((posts: Array<Post>) => this.projects = posts);
-    this._wordpressService.getSnippets().subscribe((posts: Array<Post>) => this.snippets = posts);
-    this._wordpressService.getLatestPost().subscribe((post: Post) => this.latest = post);
+    if(isBrowser) {
+      this._wordpressService.getProjects().subscribe((posts: Array<Post>) => this.projects = posts);
+      this._wordpressService.getSnippets().subscribe((posts: Array<Post>) => this.snippets = posts);
+      this._wordpressService.getLatestPost().subscribe((post: Post) => this.latest = post);
+    }
   }
 
   /**
    * Get data from github service
    */
   private _getGithub() {
-    this._githubService.getRepositories().subscribe((repositories: Array<Repository>) => this.repositories = repositories);
-    this._githubService.getPullRequests().subscribe((issues: Array<Issue>) => this.pullRequests = issues);
+    if(isBrowser) {
+      this._githubService.getRepositories().subscribe((repositories: Array<Repository>) => this.repositories = repositories);
+      this._githubService.getPullRequests().subscribe((issues: Array<Issue>) => this.pullRequests = issues);
+    }
   }
 
   /**

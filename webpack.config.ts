@@ -2,7 +2,6 @@ var webpack = require('webpack');
 var path = require('path');
 var resolveNgRoute = require('@angularclass/resolve-angular-routes');
 
-
 var commonConfig = {
   resolve: {
     extensions: ['.ts', '.js', '.json']
@@ -24,9 +23,7 @@ var commonConfig = {
       resolveNgRoute(root('./src'))
     )
   ]
-
 };
-
 
 var clientConfig = {
   target: 'web',
@@ -43,40 +40,14 @@ var clientConfig = {
   }
 };
 
-
 var serverConfig = {
   target: 'node',
-  entry: './src/server', // use the entry file of the node server if everything is ts rather than es5
+  entry: './src/server',
   output: {
     path: root('dist/server'),
     libraryTarget: 'commonjs2'
   },
-  module: {
-    loaders: [
-      { test: /angular2-material/, loader: "imports-loader?window=>global" }
-    ],
-  },
   externals: includeClientPackages([
-    // include these client packages so we can transform their source with webpack loaders
-    '@angular2-material/button',
-    '@angular2-material/button',
-    '@angular2-material/card',
-    '@angular2-material/checkbox',
-    '@angular2-material/core',
-    '@angular2-material/grid',
-    '@angular2-material/icon',
-    '@angular2-material/input',
-    '@angular2-material/list',
-    '@angular2-material/menu',
-    '@angular2-material/progress',
-    '@angular2-material/progress',
-    '@angular2-material/radio',
-    '@angular2-material/sidenav',
-    '@angular2-material/slider',
-    '@angular2-material/slide',
-    '@angular2-material/tabs',
-    '@angular2-material/toolbar',
-    '@angular2-material/tooltip'
   ]),
   node: {
     global: true,
@@ -87,7 +58,35 @@ var serverConfig = {
   }
 };
 
-
+var lambdaConfig = {
+  target: 'node',
+  entry: './src/lambda',
+  output: {
+    path: root('dist/lambda'),
+    libraryTarget: 'commonjs2'
+  },
+  plugins: [
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        unused: true,
+        dead_code: true,
+        warnings: false,
+        drop_debugger: true
+      }
+    })
+  ],
+  externals: includeClientPackages([
+  ]),
+  node: {
+    global: true,
+    __dirname: true,
+    __filename: true,
+    process: true,
+    Buffer: true
+  }
+};
 
 // Default config
 var defaultConfig = {
@@ -98,15 +97,16 @@ var defaultConfig = {
   }
 };
 
-
-
 var webpackMerge = require('webpack-merge');
 module.exports = [
   // Client
   webpackMerge({}, defaultConfig, commonConfig, clientConfig),
 
   // Server
-  webpackMerge({}, defaultConfig, commonConfig, serverConfig)
+  webpackMerge({}, defaultConfig, commonConfig, serverConfig),
+
+  // Lambda
+  webpackMerge({}, defaultConfig, commonConfig, lambdaConfig)
 ];
 
 function includeClientPackages(packages) {

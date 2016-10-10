@@ -7,11 +7,9 @@ import { HttpService } from './http.service';
 @Injectable()
 export class GithubService {
 
-  private endpoint: string;
+  private endpoint: string = 'https://api.github.com';
 
-  constructor(private httpService: HttpService) {
-    this.endpoint = 'https://api.github.com';
-  }
+  constructor(private httpService: HttpService) {}
 
   /**
    * Get popular repositories

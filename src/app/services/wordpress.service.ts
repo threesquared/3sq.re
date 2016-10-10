@@ -6,11 +6,9 @@ import { HttpService } from './http.service';
 @Injectable()
 export class WordpressService {
 
-  private endpoint: string;
+  private endpoint: string = 'https://3sq.re/blog/wp-json';
 
-  constructor(private httpService: HttpService) {
-    this.endpoint = 'https://3sq.re/blog/wp-json';
-  }
+  constructor(private httpService: HttpService) {}
 
   /**
    * Get latest projects
