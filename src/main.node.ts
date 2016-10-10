@@ -1,50 +1,51 @@
-import {
-  REQUEST_URL,
-  ORIGIN_URL,
-  NODE_LOCATION_PROVIDERS,
-  NODE_HTTP_PROVIDERS,
-  ExpressEngineConfig
-} from 'angular2-universal';
-
-import { provideRouter } from '@angular/router';
-import { APP_BASE_HREF } from '@angular/common';
-import { Title } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { UniversalModule } from 'angular2-universal';
+import { Ng2DisqusModule } from 'ng2-disqus';
 
 import { AppComponent } from './app/components/app/app.component';
+import { HomeComponent } from './app/components/home/home.component';
+import { BlogComponent } from './app/components/blog/blog.component';
+import { PostComponent } from './app/components/post/post.component';
+import { LostComponent } from './app/components/lost/lost.component';
+
 import { HttpService } from './app/services/http.service';
 import { CacheService } from './app/services/cache.service';
 import { WordpressService } from './app/services/wordpress.service';
 import { SeoHelper } from './app/helpers/seo.helper';
-import { APP_ROUTER_PROVIDERS } from './app/router/app.routes';
 
-export function ngApp(req, res) {
-  let baseUrl = '/';
-  let url = req.originalUrl || '/';
-
-  let config: ExpressEngineConfig = {
-    directives: [
-      AppComponent
-    ],
-    platformProviders: [
-      {provide: ORIGIN_URL, useValue: 'http://localhost:3000'},
-      {provide: APP_BASE_HREF, useValue: baseUrl},
-    ],
-    providers: [
-      {provide: REQUEST_URL, useValue: url},
-      NODE_HTTP_PROVIDERS,
-      APP_ROUTER_PROVIDERS,
-      NODE_LOCATION_PROVIDERS,
-      Title,
+@NgModule({
+  bootstrap: [ AppComponent ],
+  declarations: [ AppComponent, HomeComponent, BlogComponent, PostComponent, LostComponent],
+  providers: [
       HttpService,
       CacheService,
       WordpressService,
       SeoHelper
-    ],
-    async: true,
-    preboot: {
-      appRoot: 'app'
-    }
-  };
+  ],
+  imports: [
+    UniversalModule,
+    Ng2DisqusModule,
+    RouterModule.forRoot([
+      {
+        path: '',
+        component: HomeComponent
+      },
+      {
+        path: 'blog',
+        component: BlogComponent
+      },
+      {
+        path: 'blog/:year/:month/:slug',
+        component: PostComponent
+      },
+      {
+        path: '**',
+        component: LostComponent
+      },
+    ])
+  ]
+})
+export class MainModule {
 
-  res.render('index', config);
 }

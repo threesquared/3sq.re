@@ -1,41 +1,53 @@
-import 'angular2-universal/polyfills';
+// the polyfills must be the first thing imported in node.js
+import 'angular2-universal-polyfills';
 
 import * as path from 'path';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as cookieParser from 'cookie-parser';
 
+// Angular 2
 import { enableProdMode } from '@angular/core';
-import { expressEngine } from 'angular2-universal';
-import { setGlobal } from 'angular2-universal/dist/node/mock/window';
+// Angular 2 Universal
+import { createEngine } from 'angular2-express-engine';
 
+// App
+import { MainModule } from './main.node';
+
+// enable prod for faster renders
 enableProdMode();
-setGlobal();
 
 const app = express();
-const port = process.env.PORT || 3000;
-const ip = process.env.HOST || '0.0.0.0';
 const ROOT = path.join(path.resolve(__dirname, '..'));
 
-app.engine('.html', expressEngine);
+// Express View
+app.engine('.html', createEngine({}));
 app.set('views', __dirname);
 app.set('view engine', 'html');
 
 app.use(cookieParser('Angular 2 Universal'));
 app.use(bodyParser.json());
 
+// Serve static files
 app.use('/assets', express.static(path.join(__dirname, 'assets'), {maxAge: 30}));
 app.use(express.static(path.join(ROOT, 'dist/client'), {index: false}));
+app.use(express.static(path.join(ROOT, 'src/public'), {index: false}));
 
-import { ngApp } from './main.node';
+function ngApp(req, res) {
+  res.render('index', {
+    req,
+    res,
+    ngModule: MainModule,
+    preboot: false,
+    baseUrl: '/',
+    requestUrl: req.originalUrl,
+    originUrl: 'http://localhost:3000'
+  });
+}
 
 app.get('/', ngApp);
 app.get('/blog', ngApp);
 app.get('/blog/*', ngApp);
-
-function indexFile(req, res) {
-  res.sendFile('/index.html', {root: __dirname});
-}
 
 app.get('*', function(req, res) {
   res.setHeader('Content-Type', 'application/json');
@@ -44,6 +56,7 @@ app.get('*', function(req, res) {
   res.status(404).send(json);
 });
 
-app.listen(port, ip, () => {
-  console.log(`Listening on: http://${ip}:${port}`);
+// Server
+let server = app.listen(process.env.PORT || 3000, () => {
+  console.log(`Listening on: http://localhost:${server.address().port}`);
 });

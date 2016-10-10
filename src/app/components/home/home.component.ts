@@ -1,6 +1,4 @@
 import { Component, OnInit, } from '@angular/core';
-import { ROUTER_DIRECTIVES} from '@angular/router';
-import { PageScrollConfig } from 'ng2-page-scroll';
 
 import { SeoHelper } from '../../helpers/seo.helper';
 import { WordpressService } from '../../services/wordpress.service';
@@ -12,8 +10,7 @@ import { Issue } from '../../models/issue';
 
 @Component({
   selector: 'home',
-  templateUrl: '../../templates/home.html',
-  directives: [ROUTER_DIRECTIVES],
+  templateUrl: '../../templates/home.html'
 })
 
 export class HomeComponent implements OnInit {
@@ -30,9 +27,7 @@ export class HomeComponent implements OnInit {
     private _wordpressService: WordpressService,
     private _githubService: GithubService,
     private _seoHelper: SeoHelper
-  ) {
-    PageScrollConfig.defaultDuration = 500;
-  }
+  ) {}
 
   public ngOnInit() {
     this._seoHelper.setMeta('Ben Speakman\'s portfolio', 'Portfolio of Ben Speakman, a talented software engineering graduate and backend PHP developer');
