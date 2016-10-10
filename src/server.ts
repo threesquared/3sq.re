@@ -16,7 +16,7 @@ const app = express();
 const ROOT = path.join(path.resolve(__dirname, '..'));
 
 app.locals.asset_url = (path) => {
-  const base = process.env.LAMBDA_TASK_ROOT ? 'https://d11t4m2g3rm2fm.cloudfront.net' : '';
+  const base = process.env.LAMBDA_TASK_ROOT ? 'https://s3-eu-west-1.amazonaws.com/3sq.re' : '';
   return `${base}${path}`;
 };
 
