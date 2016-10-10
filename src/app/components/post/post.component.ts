@@ -16,16 +16,17 @@ export class PostComponent implements OnInit, OnDestroy {
   private sub: any;
 
   constructor(
-    private _route: ActivatedRoute,
-    private _wordpressService: WordpressService,
-    private _seoHelper: SeoHelper) {}
+    private route: ActivatedRoute,
+    private wordpressService: WordpressService,
+    private seoHelper: SeoHelper
+  ) {}
 
   public ngOnInit() {
-    this.sub = this._route.params.subscribe(params => {
+    this.sub = this.route.params.subscribe(params => {
       let slug = params['slug'];
-      this._wordpressService.getPost(slug).subscribe((post: Post) => {
+      this.wordpressService.getPost(slug).subscribe((post: Post) => {
         this.post = post;
-        this._seoHelper.setMeta(post.title, post.description, post.link, post.date, post.modified, post.category);
+        this.seoHelper.setMeta(post.title, post.description, post.link, post.date, post.modified, post.category);
       });
     });
   }

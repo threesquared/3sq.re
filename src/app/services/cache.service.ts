@@ -14,11 +14,11 @@ export class CacheService {
    */
   public checkCache(key: string, callback: () => Observable<any>): Observable<any> {
     return Observable.create(observer => {
-      if (this._check(key)) {
-        observer.next(this._get(key));
+      if (this.check(key)) {
+        observer.next(this.get(key));
       } else {
         callback().subscribe((results: Array<any>) => {
-          this._put(key, results);
+          this.put(key, results);
           observer.next(results);
           observer.complete();
         });
@@ -31,7 +31,7 @@ export class CacheService {
    * @param {string} key
    * @return {bool}
    */
-  private _check(key: string) {
+  private check(key: string) {
     if (typeof this.cache[key] === 'undefined') {
       return false;
     }
@@ -44,7 +44,7 @@ export class CacheService {
    * @param {any}    data
    * @return {void}
    */
-  private _put(key: string, data: any) {
+  private put(key: string, data: any) {
     this.cache[key] = data;
   }
 
@@ -53,7 +53,7 @@ export class CacheService {
    * @param {string} key
    * @return {any}
    */
-  private _get(key: string) {
+  private get(key: string) {
     return this.cache[key];
   }
 

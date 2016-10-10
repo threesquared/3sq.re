@@ -49,12 +49,12 @@ app.get('/blog/*', ngApp);
 
 app.get('*', function(req, res) {
   res.setHeader('Content-Type', 'application/json');
-  var pojo = { status: 404, message: 'No Content' };
-  var json = JSON.stringify(pojo, null, 2);
+  let pojo = { status: 404, message: 'No Content' };
+  let json = JSON.stringify(pojo, null, 2);
   res.status(404).send(json);
 });
 
-export default app
+export default app;
 
 let server = app.listen(process.env.PORT || 3000, () => {
   console.log(`Listening on: http://localhost:${server.address().port}`);

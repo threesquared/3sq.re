@@ -49,7 +49,7 @@ import { SeoHelper } from './app/helpers/seo.helper';
       {
         path: '**',
         component: LostComponent
-      },
+      }
     ])
   ]
 })
