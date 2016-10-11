@@ -9,7 +9,7 @@ module.exports = function(config) {
     preprocessors: { './spec-bundle.js': ['coverage', 'webpack', 'sourcemap'] },
     webpack: testWebpackConfig,
     coverageReporter: {
-      type: 'in-memory'
+      type: 'in-memory',
     },
     remapCoverageReporter: {
       'text-summary': null,
