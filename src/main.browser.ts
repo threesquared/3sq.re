@@ -4,6 +4,7 @@ import { UniversalModule } from 'angular2-universal';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
 import { Ng2DisqusModule } from 'ng2-disqus';
 import { PageScrollConfig } from 'ng2-page-scroll';
+import { HighlightJsModule, HighlightJsService } from 'angular2-highlight-js';
 
 import { AppComponent } from './app/components/app/app.component';
 import { HomeComponent } from './app/components/home/home.component';
@@ -23,12 +24,14 @@ import { SeoHelper } from './app/helpers/seo.helper';
       HttpService,
       CacheService,
       WordpressService,
-      SeoHelper
+      SeoHelper,
+      HighlightJsService
   ],
   imports: [
     UniversalModule,
     Ng2PageScrollModule,
     Ng2DisqusModule,
+    HighlightJsModule,
     RouterModule.forRoot([
       {
         path: '',

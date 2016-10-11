@@ -5,7 +5,7 @@
 				<a [routerLink]="['/blog']">Blog</a> » <a>{{ post.title }}</a>
 			</div>
 			<div class="postdate">Posted on {{ post.date | date:'yMMMMd' }} by <span itemprop="author">{{ post.author }}</span></div>
-			<div class="postcontent" itemprop="articleBody" [innerHTML]="post.content"></div>
+			<div class="postcontent" itemprop="articleBody" [innerHTML]="post.content" highlight-js-content="pre"></div>
 		</div>
 		<disqus [shortname]="'threesquared'" [identifier]="post.id"></disqus>
 	</div>

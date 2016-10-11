@@ -91,7 +91,7 @@
 
             <div class="col-md-7 latest" *ngIf="latest">
                 <h4>{{ latest.title }}</h4>
-                <div class="excerpt" [innerHtml]="latest.getExcerpt()"></div>
+                <div class="excerpt" [innerHtml]="latest.getExcerpt()" highlight-js-content="pre"></div>
                 <p class="bold"><a [routerLink]="['/blog/', latest.getYear(), latest.getMonth(), latest.slug]">Click here to read more <i class="fa fa-arrow-right"></i></a></p>
             </div>
         </div>
