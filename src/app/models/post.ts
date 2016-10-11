@@ -34,7 +34,7 @@ export class Post {
   }
 
   public getMonth() {
-    return ('0' + (this.date.getMonth()+1)).slice(-2);
+    return ('0' + (this.date.getMonth() + 1)).slice(-2);
   }
 
   public getYear() {

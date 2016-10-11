@@ -1,4 +1,5 @@
-import { Component, OnInit, } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { isBrowser } from 'angular2-universal';
 
 import { SeoHelper } from '../../helpers/seo.helper';
 import { WordpressService } from '../../services/wordpress.service';
@@ -24,41 +25,45 @@ export class HomeComponent implements OnInit {
   public age: number;
 
   constructor(
-    private _wordpressService: WordpressService,
-    private _githubService: GithubService,
-    private _seoHelper: SeoHelper
+    private wordpressService: WordpressService,
+    private githubService: GithubService,
+    private seoHelper: SeoHelper
   ) {}
 
   public ngOnInit() {
-    this._seoHelper.setMeta('Ben Speakman\'s portfolio', 'Portfolio of Ben Speakman, a talented software engineering graduate and backend PHP developer');
+    this.seoHelper.setMeta('Ben Speakman\'s portfolio', 'Portfolio of Ben Speakman, a talented software engineering graduate and backend PHP developer');
     this.birthday = new Date('1988-04-09');
-    this.age = this._calculateAge(this.birthday);
-    this._getWordpress();
-    this._getGithub();
+    this.age = this.calculateAge(this.birthday);
+    this.getWordpress();
+    this.getGithub();
   }
 
   /**
    * Get data from wordpress service
    */
-  private _getWordpress() {
-    this._wordpressService.getProjects().subscribe((posts: Array<Post>) => this.projects = posts);
-    this._wordpressService.getSnippets().subscribe((posts: Array<Post>) => this.snippets = posts);
-    this._wordpressService.getLatestPost().subscribe((post: Post) => this.latest = post);
+  private getWordpress() {
+    if (isBrowser) {
+      this.wordpressService.getProjects().subscribe((posts: Array<Post>) => this.projects = posts);
+      this.wordpressService.getSnippets().subscribe((posts: Array<Post>) => this.snippets = posts);
+      this.wordpressService.getLatestPost().subscribe((post: Post) => this.latest = post);
+    }
   }
 
   /**
    * Get data from github service
    */
-  private _getGithub() {
-    this._githubService.getRepositories().subscribe((repositories: Array<Repository>) => this.repositories = repositories);
-    this._githubService.getPullRequests().subscribe((issues: Array<Issue>) => this.pullRequests = issues);
+  private getGithub() {
+    if (isBrowser) {
+      this.githubService.getRepositories().subscribe((repositories: Array<Repository>) => this.repositories = repositories);
+      this.githubService.getPullRequests().subscribe((issues: Array<Issue>) => this.pullRequests = issues);
+    }
   }
 
   /**
    * Calculate age in years from a given date
    * @param {Date} birthday
    */
-  private _calculateAge(birthday: Date) {
+  private calculateAge(birthday: Date) {
     let ageDifMs = Date.now() - birthday.getTime();
     let ageDate = new Date(ageDifMs);
     return Math.abs(ageDate.getUTCFullYear() - 1970);

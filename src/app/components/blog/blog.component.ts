@@ -7,7 +7,7 @@ import { Post } from '../../models/post';
 
 @Component({
   selector: 'blog',
-  templateUrl: '../../templates/blog.html',
+  templateUrl: '../../templates/blog.html'
 })
 
 export class BlogComponent implements OnInit, OnDestroy {
@@ -17,19 +17,20 @@ export class BlogComponent implements OnInit, OnDestroy {
   private sub: any;
 
   constructor(
-    private _route: ActivatedRoute,
-    private _wordpressService: WordpressService,
-    private _seoHelper: SeoHelper) {}
+    private route: ActivatedRoute,
+    private wordpressService: WordpressService,
+    private seoHelper: SeoHelper
+  ) {}
 
   public ngOnInit() {
-    this._seoHelper.setMeta('Blog', 'Blog');
+    this.seoHelper.setMeta('Blog', 'Blog');
 
-    this.sub = this._route.params.subscribe(params => {
+    this.sub = this.route.params.subscribe(params => {
       let page = params['page'];
       if (page) {
         this.page = +page;
       }
-      this._wordpressService.getPosts(this.page).subscribe((posts: Array<Post>) => {
+      this.wordpressService.getPosts(this.page).subscribe((posts: Array<Post>) => {
         this.posts = posts;
       });
     });

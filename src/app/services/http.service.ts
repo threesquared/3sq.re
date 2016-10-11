@@ -10,7 +10,8 @@ export class HttpService {
 
   constructor(
     private http: Http,
-    private cache: CacheService) {}
+    private cache: CacheService
+  ) {}
 
   /**
    * Fetch a url and return results

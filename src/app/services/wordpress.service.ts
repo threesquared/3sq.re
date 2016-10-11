@@ -6,19 +6,19 @@ import { HttpService } from './http.service';
 @Injectable()
 export class WordpressService {
 
-  private endpoint: string;
+  private endpoint: string = 'https://blog.3sq.re/?json_route=';
 
-  constructor(private httpService: HttpService) {
-    this.endpoint = 'https://3sq.re/blog/wp-json';
-  }
+  constructor(
+    private httpService: HttpService
+  ) {}
 
   /**
    * Get latest projects
    * @return {Observable}
    */
   public getProjects(): Observable<any> {
-    let results = this.httpService.getUrl(`${this.endpoint}/posts?filter[posts_per_page]=5&filter[category_name]=Projects`);
-    return this.httpService.mapResults(results, this._hydratePost);
+    let results = this.httpService.getUrl(`${this.endpoint}/posts&filter[posts_per_page]=5&filter[category_name]=Projects`);
+    return this.httpService.mapResults(results, this.hydratePost);
   }
 
   /**
@@ -26,8 +26,8 @@ export class WordpressService {
    * @return {Observable}
    */
   public getSnippets(): Observable<any> {
-    let results = this.httpService.getUrl(`${this.endpoint}/posts?filter[posts_per_page]=5&filter[category_name]=Snippets`);
-    return this.httpService.mapResults(results, this._hydratePost);
+    let results = this.httpService.getUrl(`${this.endpoint}/posts&filter[posts_per_page]=5&filter[category_name]=Snippets`);
+    return this.httpService.mapResults(results, this.hydratePost);
   }
 
   /**
@@ -35,8 +35,8 @@ export class WordpressService {
    * @return {Observable}
    */
   public getLatestPost(): Observable<any> {
-    let result = this.httpService.getUrl(`${this.endpoint}/posts?filter[posts_per_page]=1`);
-    return this.httpService.mapResult(result, this._hydratePost);
+    let result = this.httpService.getUrl(`${this.endpoint}/posts&filter[posts_per_page]=1`);
+    return this.httpService.mapResult(result, this.hydratePost);
   }
 
   /**
@@ -45,8 +45,8 @@ export class WordpressService {
    * @return {Observable}
    */
   public getPost(slug: string): Observable<any> {
-    let result = this.httpService.getUrl(`${this.endpoint}/posts?filter[name]=${slug}`);
-    return this.httpService.mapResult(result, this._hydratePost);
+    let result = this.httpService.getUrl(`${this.endpoint}/posts&filter[name]=${slug}`);
+    return this.httpService.mapResult(result, this.hydratePost);
   }
 
   /**
@@ -55,8 +55,8 @@ export class WordpressService {
    * @return {Observable}
    */
   public getPosts(page: number = 1): Observable<any> {
-    let results = this.httpService.getUrl(`${this.endpoint}/posts?filter[posts_per_page]=5&page=${page}`);
-    return this.httpService.mapResults(results, this._hydratePost);
+    let results = this.httpService.getUrl(`${this.endpoint}/posts&filter[posts_per_page]=5&page=${page}`);
+    return this.httpService.mapResults(results, this.hydratePost);
   }
 
   /**
@@ -64,7 +64,7 @@ export class WordpressService {
    * @param  {Array} data
    * @return {Post}
    */
-  private _hydratePost(data: { ID; title; content; date; modified; author: { name; }; slug; link; yoast_meta: { yoast_wpseo_metadesc; }; terms: { category: Array<{ name; }>; };  }): Post {
+  private hydratePost(data: { ID; title; content; date; modified; author: { name; }; slug; link; yoast_meta: { yoast_wpseo_metadesc; }; terms: { category: Array<{ name; }>; };  }): Post {
     return new Post(data.ID, data.title, data.yoast_meta.yoast_wpseo_metadesc, data.content, new Date(data.date), new Date(data.modified), data.author.name, data.slug, data.link, data.terms.category[0].name);
   }
 
