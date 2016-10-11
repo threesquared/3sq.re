@@ -21,8 +21,9 @@
     "sass": "node-sass src/assets/scss/style.scss --output src/assets/css --source-map true --output-style compressed",
     "sass:w": "npm run sass -- --watch=\"scss\" -r",
     "package": "cp dist/lambda/index.js index.js && zip -q -r lambda.zip index.js node_modules src && rm index.js",
-    "deploy:assets": "AWS_DEFAULT_PROFILE=personal aws s3 cp ./dist/client/index.js s3://3sq.re/index.js --region eu-west-1 --acl public-read && aws s3 cp ./src/assets s3://3sq.re/assets --recursive --region eu-west-1 --acl public-read",
-    "deploy": "npm run build:prod && npm run package && npm run deploy:assets && npm run lambda:update",
+    "deploy:client": "AWS_DEFAULT_PROFILE=personal aws s3 cp ./dist/client/index.js s3://3sq.re/index.js --region eu-west-1 --acl public-read",
+    "deploy:assets": "AWS_DEFAULT_PROFILE=personal aws s3 cp ./src/assets s3://3sq.re/assets --recursive --region eu-west-1 --acl public-read",
+    "deploy": "npm run build:prod && npm run package && npm run deploy:client && npm run deploy:assets && npm run lambda:update",
     "lambda:update": "AWS_DEFAULT_PROFILE=personal aws lambda update-function-code --function-name 3sq --region eu-west-1 --zip-file fileb://lambda.zip"
   },
   "dependencies": {
