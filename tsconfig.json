@@ -16,10 +16,13 @@
       "cookie-parser",
       "express",
       "express-serve-static-core",
+      "jasmine",
       "mime",
       "node",
       "serve-static",
-      "hammerjs"
+      "source-map",
+      "hammerjs",
+      "webpack"
     ]
   },
   "exclude": [
