@@ -25,7 +25,7 @@ export class Post {
   }
 
   public getUrl() {
-    return `/${this.date.getFullYear()}/${this.date.getMonth()}/${this.slug}`;
+    return `/${this.getYear()}/${this.getMonth()}/${this.slug}`;
   }
 
   public getExcerpt() {
