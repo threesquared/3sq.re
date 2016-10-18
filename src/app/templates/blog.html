@@ -18,7 +18,7 @@
 					<a [routerLink]="['/blog/', post.getYear(), post.getMonth(), post.slug]">{{ post.title }}</a>
 				</h2>
 				<div class="postdate">Posted on {{ post.date | date:'yMMMMd' }} by {{ post.author }}</div>
-				<div class="entry-content" [innerHtml]="post.getExcerpt()"></div>
+				<div class="entry-content" [innerHtml]="post.getExcerpt()" highlight-js-content="pre"></div>
 				<p><a [routerLink]="['/blog/', post.getYear(), post.getMonth(), post.slug]">Click here to read more <i class="fa fa-arrow-right"></i></a></p>
 			</article>
 
