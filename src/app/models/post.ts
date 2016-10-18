@@ -40,19 +40,4 @@ export class Post {
   public getYear() {
     return this.date.getFullYear();
   }
-
-  // h4x
-  public getContent() {
-    let content = this.content;
-    content = content.replace(/<pre>/g, '');
-    content = content.replace(/<\/pre>/g, '');
-    content = content.replace(/<\/code>/g, '</codeblock>');
-    content = content.replace(/<code>/g, '<codeblock theme="okaidia">');
-    content = content.replace(/<code class="language-php">/g, '<codeblock php theme="okaidia" [lineNumbers]="false">');
-    content = content.replace(/<code class="language-javascript">/g, '<codeblock javascript theme="okaidia" [lineNumbers]="false">');
-    content = content.replace(/<code class="language-ini">/g, '<codeblock ini theme="okaidia" [lineNumbers]="false">');
-    content = content.replace(/<code class="language-bash">/g, '<codeblock bash theme="okaidia" [lineNumbers]="false">');
-    return content;
-  }
-
 }
