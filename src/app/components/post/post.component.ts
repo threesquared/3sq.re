@@ -26,7 +26,7 @@ export class PostComponent implements OnInit, OnDestroy {
       let slug = params['slug'];
       this.wordpressService.getPost(slug).subscribe((post: Post) => {
         this.post = post;
-        this.seoHelper.setMeta(post.title, post.description, post.link, post.date, post.modified, post.category);
+        this.seoHelper.setMeta(post.title, post.description, `https://3sq.re/blog${post.getUrl()}`, post.date, post.modified, post.category);
       });
     });
   }
