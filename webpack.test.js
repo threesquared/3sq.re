@@ -38,7 +38,7 @@ module.exports = function(options) {
           test: /\.ts$/,
           loader: 'awesome-typescript-loader',
           query: {
-            sourceMap: true,
+            sourceMap: false,
             inlineSourceMap: true,
             compilerOptions: {
               removeComments: true
@@ -52,10 +52,12 @@ module.exports = function(options) {
 
       postLoaders: [
         {
-          test: /\.(js|ts)$/, loader: 'istanbul-instrumenter-loader',
+          test: /\.(js|ts)$/,
+          loader: 'istanbul-instrumenter-loader',
           include: root('src'),
           exclude: [
-            /node_modules/
+            /node_modules/,
+            /\.(e2e|spec)\.ts$/
           ]
         }
       ]
