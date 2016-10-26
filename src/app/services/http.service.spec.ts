@@ -69,31 +69,6 @@ describe('Http Service', () => {
 
   }));
 
-  it('should map results', inject([HttpService], (httpService) => {
 
-    let observable = Observable.of({items: [{id: 1}]});
-
-    let hydrator = (data) => { return new TestClass(data.id); };
-
-    httpService.mapResults(observable, hydrator).subscribe(data => {
-      expect(data.length).toBe(1);
-      expect(data[0] instanceof TestClass).toBeTruthy();
-      expect(data[0].id).toBe(1);
-    });
-
-  }));
-
-  it('should map a result', inject([HttpService], (httpService) => {
-
-    let observable = Observable.of([{id: 1}]);
-
-    let hydrator = (data) => { return new TestClass(data.id); };
-
-    httpService.mapResult(observable, hydrator).subscribe(data => {
-      expect(data instanceof TestClass).toBeTruthy();
-      expect(data.id).toBe(1);
-    });
-
-  }));
 
 });
