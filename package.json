@@ -1,36 +1,18 @@
 {
   "name": "3sq.re",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "",
-  "main": "script.js",
-  "scripts": {
-    "start": "webpack-dev-server --progress --watch-poll --config webpack.dev.js",
-    "build": "webpack --progress --profile --bail --display-reasons --display-error-details --config webpack.prod.js --watch"
-  },
+  "main": "src/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/threesquared/3sq.re.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Ben Speakman",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/threesquared/3sq.re/issues"
   },
   "homepage": "https://github.com/threesquared/3sq.re#readme",
-  "devDependencies": {
-    "@jetbrains/kotlin-webpack-plugin": "^1.2.10",
-    "clean-webpack-plugin": "^0.1.19",
-    "css-loader": "^1.0.0",
-    "html-webpack-plugin": "^3.2.0",
-    "kotlin": "^1.2.71",
-    "mini-css-extract-plugin": "^0.4.4",
-    "source-map-loader": "^0.2.4",
-    "uglifyjs-webpack-plugin": "^2.0.1",
-    "webpack": "^4.20.2",
-    "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.9",
-    "webpack-merge": "^4.1.4"
-  },
   "dependencies": {
     "javascript-terminal": "^1.0.2"
   }
