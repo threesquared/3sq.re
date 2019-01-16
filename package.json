@@ -1,27 +1,37 @@
 {
   "name": "3sq.re",
-  "version": "3.0.0",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "start": "webpack-dev-server --progress --watch-poll --config webpack.dev.js",
+    "build": "webpack --progress --profile --bail --display-reasons --display-error-details --config webpack.prod.js --watch"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/threesquared/3sq.re.git"
+    "url": "git+https://github.com/threesquared/3sq.re.git"
   },
-  "private": true,
-  "dependencies": {
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
-    "react-scripts-ts": "2.17.0"
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/threesquared/3sq.re/issues"
   },
-  "scripts": {
-    "start": "react-scripts-ts start",
-    "build": "react-scripts-ts build",
-    "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject"
-  },
+  "homepage": "https://github.com/threesquared/3sq.re#readme",
   "devDependencies": {
-    "@types/jest": "^23.3.2",
-    "@types/node": "^10.11.0",
-    "@types/react": "^16.4.14",
-    "@types/react-dom": "^16.0.7",
-    "typescript": "^3.0.3"
+    "@jetbrains/kotlin-webpack-plugin": "^1.2.10",
+    "clean-webpack-plugin": "^0.1.19",
+    "css-loader": "^1.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "kotlin": "^1.2.71",
+    "mini-css-extract-plugin": "^0.4.4",
+    "source-map-loader": "^0.2.4",
+    "uglifyjs-webpack-plugin": "^2.0.1",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.9",
+    "webpack-merge": "^4.1.4"
+  },
+  "dependencies": {
+    "javascript-terminal": "^1.0.2"
   }
 }
