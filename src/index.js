@@ -1,97 +1,57 @@
-import { addKeyDownListener, scrollToPageEnd, createOutputDiv } from './util';
-import * as Terminal from 'javascript-terminal';
+import Octokit from '@octokit/rest';
+import 'babel-polyfill';
+import Terminal from './modules/terminal';
+import style from './css/app.css';
 
-const viewRefs = {
-    input: document.getElementById('input'),
-    output: document.getElementById('output-wrapper')
-};
+const octokit = new Octokit();
 
-const outputToHTMLNode = {
-    [Terminal.OutputType.TEXT_OUTPUT_TYPE]: content => createOutputDiv('text-output', content),
-    [Terminal.OutputType.TEXT_ERROR_OUTPUT_TYPE]: content => createOutputDiv('error-output', content),
-    [Terminal.OutputType.HEADER_OUTPUT_TYPE]: content => createOutputDiv('header-output', `root@3sq.re:~$ ${content.command}`)
-};
+async function getPullRequests() {
+    const results = await octokit.search.issues({
+        q: 'author:threesquared type:pr is:public state:closed',
+        sort: 'created',
+        order: 'desc',
+        per_page: 10,
+    });
 
-const displayOutputs = (outputs) => {
-    viewRefs.output.innerHTML = '';
+    console.log(results.data.items);
+}
 
-    const outputNodes = outputs.map(output =>
-        outputToHTMLNode[output.type](output.content)
-    );
+async function getRepositories() {
+    const results = await octokit.search.repos({
+        q: 'user:threesquared',
+        sort: 'updated',
+        order: 'desc',
+        per_page: 10,
+    });
 
-    for (const outputNode of outputNodes) {
-        viewRefs.output.append(outputNode);
-    }
-};
+    console.log(results.data.items);
+}
 
-const getInput = () => viewRefs.input.value;
+document.getElementById('terminal-container').addEventListener('click', (e) => {
+    document.getElementById('input').focus();
+});
 
-const setInput = (input) => {
-    viewRefs.input.value = input;
-};
+const terminal = new Terminal(document.getElementById('input'), document.getElementById('output-wrapper'));
 
-const clearInput = () => {
-    setInput('');
-};
-
-const emulator = new Terminal.Emulator();
-
-const customFileSystem = Terminal.FileSystem.create({
+terminal.setFilesystem({
     '/home/ben': { },
     '/home/ben/about.json': {
-        content: "{ name: 'Ben Speakman' }",
-        canModify: false
+        content: `<pre>${JSON.stringify({
+            name: 'Ben Speakman',
+            url: 'https://3sq.re',
+        }, null, 2)}</pre>`,
+        canModify: false,
     },
     '/home/ben/cv.docx': {
-        content: 'Content!'
+        content: 'Content!',
     },
-    '/var/github': { },
+    '/var/github': {},
     '/var/projects': { },
 });
 
-const customCommandMapping = Terminal.CommandMapping.create({
-    ...Terminal.defaultCommandMapping,
-    'help': {
-        'function': (state, opts) => {
-            const input = opts.join(' ');
+terminal.setCommandMapping();
 
-            return {
-                output: OutputFactory.makeTextOutput(input)
-            };
-        },
-        'optDef': {}
-    }
-});o
+terminal.init();
 
-let emulatorState = Terminal.EmulatorState.create({
-    'fs': customFileSystem,
-    'commandMapping': customCommandMapping
-})
 
-const historyKeyboardPlugin = new Terminal.HistoryKeyboardPlugin(emulatorState);
-const plugins = [historyKeyboardPlugin];
-
-addKeyDownListener('Enter', viewRefs.input, () => {
-    const commandStr = getInput();
-
-    emulatorState = emulator.execute(emulatorState, commandStr, plugins);
-    displayOutputs(emulatorState.getOutputs());
-    scrollToPageEnd();
-    clearInput();
-});
-
-addKeyDownListener('ArrowUp', viewRefs.input, () => {
-    setInput(historyKeyboardPlugin.completeUp());
-});
-
-addKeyDownListener('ArrowDown', viewRefs.input, () => {
-    setInput(historyKeyboardPlugin.completeDown());
-});
-
-addKeyDownListener('Tab', viewRefs.input, () => {
-    const autoCompletionStr = emulator.autocomplete(emulatorState, getInput());
-
-    setInput(autoCompletionStr);
-});
-
-localStorage.setItem('lastLogin', + new Date());
+terminal.addFile('lol', 'test');

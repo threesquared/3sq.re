@@ -38,6 +38,7 @@ body {
     border-radius: 8px 8px 0 0;
     padding-left: 10px;
     box-shadow: 10px 10px 26px 2px rgba(0, 0, 0, 0.2);
+    display: flex;
 }
 
 #terminal-wrapper .terminal-topbar .button {
@@ -51,12 +52,29 @@ body {
 #terminal-wrapper .terminal-topbar .button.red {
     background: #E75448;
 }
+
 #terminal-wrapper .terminal-topbar .button.green {
     background: #2ecc71;
 }
 
 #terminal-wrapper .terminal-topbar .button.yellow {
     background: #f39c12;
+}
+
+#terminal-wrapper .host {
+    color: #67F86F;
+}
+
+#terminal-wrapper .path {
+    color: #49B2E7;
+}
+
+#terminal-wrapper .terminal-topbar #title {
+    font-size: 14px;
+    flex: 1;
+    text-align: center;
+    margin: 10px;
+    color: #697178;
 }
 
 #terminal-wrapper #terminal-container {
@@ -116,4 +134,23 @@ body {
     display: inline-block;
     width: 100%;
     margin-bottom: 5px;
+}
+
+/* Scrollbar */
+#terminal-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+#terminal-container::-webkit-scrollbar-track {
+    background: #30353A;
+    border-radius: 0 0 10px 0;
+}
+
+#terminal-container::-webkit-scrollbar-thumb {
+    background: #4C535A;
+    border-radius: 4px;
+}
+
+#terminal-container::-webkit-scrollbar-thumb:hover {
+    background: #697178;
 }
