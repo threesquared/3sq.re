@@ -1,11 +1,12 @@
-import * as JavascriptTerminal from 'javascript-terminal';
+import * as JsTerm from 'javascript-terminal';
+import { fromJS } from 'immutable';
 import { addKeyDownListener, createOutputDiv, scrollToEnd } from './util';
 
 export default class Terminal {
     constructor(input, output) {
         this.input = input;
         this.output = output;
-        this.emulator = new JavascriptTerminal.Emulator();
+        this.emulator = new JsTerm.Emulator();
 
         addKeyDownListener('Enter', this.input, this.keyDownEnter.bind(this));
         addKeyDownListener('ArrowUp', this.input, this.keyDownArrowUp.bind(this));
@@ -33,7 +34,7 @@ export default class Terminal {
         scrollToEnd();
 
         this.clearInput();
-        this.setCwd(JavascriptTerminal.EnvironmentVariables.getEnvironmentVariable(this.emulatorState.getEnvVariables(), 'cwd'));
+        this.setCwd(JsTerm.EnvironmentVariables.getEnvironmentVariable(this.emulatorState.getEnvVariables(), 'cwd'));
     }
 
     keyDownTab() {
@@ -63,9 +64,9 @@ export default class Terminal {
         this.output.innerHTML = '';
 
         const outputToHTMLNode = {
-            [JavascriptTerminal.OutputType.TEXT_OUTPUT_TYPE]: content => createOutputDiv('text-output', content),
-            [JavascriptTerminal.OutputType.TEXT_ERROR_OUTPUT_TYPE]: content => createOutputDiv('error-output', content),
-            [JavascriptTerminal.OutputType.HEADER_OUTPUT_TYPE]: content => createOutputDiv('header-output', `<span class="host">root@3sq</span>:<span class="path">${content.cwd}</span>$&nbsp;${content.command}`),
+            [JsTerm.OutputType.TEXT_OUTPUT_TYPE]: content => createOutputDiv('text-output', content),
+            [JsTerm.OutputType.TEXT_ERROR_OUTPUT_TYPE]: content => createOutputDiv('error-output', content),
+            [JsTerm.OutputType.HEADER_OUTPUT_TYPE]: content => createOutputDiv('header-output', `<span class="host">root@3sq</span>:<span class="path">${content.cwd}</span>$&nbsp;${content.command}`),
         };
 
         outputs.map(output => outputToHTMLNode[output.type](output.content))
@@ -73,21 +74,26 @@ export default class Terminal {
     }
 
     setFilesystem(data) {
-        this.filesystem = JavascriptTerminal.FileSystem.create(data);
+        this.filesystem = JsTerm.FileSystem.create(data);
     }
 
-    addFile(path, file) {
-        const data = JavascriptTerminal.FileOp.writeFile(this.filesystem, path, file);
-        //this.emulatorState.setFilesystem(data);
+    addFile(path, content) {
+        const file = fromJS({
+            content,
+        });
+
+        const { fs } = JsTerm.FileOp.writeFile(this.emulatorState.getFileSystem(), path, file);
+
+        this.emulatorState = this.emulatorState.setFileSystem(fs);
     }
 
     setCommandMapping() {
-        this.commandMapping = JavascriptTerminal.CommandMapping.create({
-            ...JavascriptTerminal.defaultCommandMapping,
+        this.commandMapping = JsTerm.CommandMapping.create({
+            ...JsTerm.defaultCommandMapping,
             help: {
                 function: (state, opts) => {
                     return {
-                        output: JavascriptTerminal.OutputFactory.makeTextOutput('Help'),
+                        output: JsTerm.OutputFactory.makeTextOutput('Help'),
                     };
                 },
                 optDef: {},
@@ -96,11 +102,17 @@ export default class Terminal {
     }
 
     init() {
-        this.emulatorState = JavascriptTerminal.EmulatorState.create({
+        const defaultEnvVariables = JsTerm.EnvironmentVariables.create();
+        const customEnvVariables = JsTerm.EnvironmentVariables.setEnvironmentVariable(
+            defaultEnvVariables, 'cwd', '/home/ben',
+        );
+
+        this.emulatorState = JsTerm.EmulatorState.create({
             fs: this.filesystem,
+            environmentVariables: customEnvVariables,
             commandMapping: this.commandMapping,
         });
 
-        this.historyKeyboardPlugin = new JavascriptTerminal.HistoryKeyboardPlugin(this.emulatorState);
+        this.historyKeyboardPlugin = new JsTerm.HistoryKeyboardPlugin(this.emulatorState);
     }
 }
