@@ -1,0 +1,159 @@
+html, button, input, select, textarea, pre {
+    font-family: 'Ubuntu Mono', monospace;
+}
+
+html, body {
+    box-sizing: border-box;
+    color: white;
+    font-size: 1.25em;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    background-color: #3189B1;
+}
+
+#terminal-wrapper {
+    max-width: 900px;
+    width: 100%;
+    margin: 50px auto;
+    position: relative;
+    top: 0px;
+}
+
+#terminal-wrapper * {
+    color: white;
+}
+
+#terminal-wrapper pre {
+    background: transparent;
+}
+
+#terminal-wrapper .terminal-topbar {
+    background: #30353A;
+    height: 30px;
+    border-radius: 8px 8px 0 0;
+    padding-left: 10px;
+    box-shadow: 10px 10px 26px 2px rgba(0, 0, 0, 0.2);
+    display: flex;
+}
+
+#terminal-wrapper .terminal-topbar .button {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 10px 2px;
+}
+
+#terminal-wrapper .terminal-topbar .button.red {
+    background: #E75448;
+}
+
+#terminal-wrapper .terminal-topbar .button.green {
+    background: #2ecc71;
+}
+
+#terminal-wrapper .terminal-topbar .button.yellow {
+    background: #f39c12;
+}
+
+#terminal-wrapper .host {
+    color: #67F86F;
+}
+
+#terminal-wrapper .path {
+    color: #49B2E7;
+}
+
+#terminal-wrapper .terminal-topbar #title {
+    font-size: 14px;
+    flex: 1;
+    text-align: center;
+    margin: 10px;
+    color: #697178;
+}
+
+#terminal-wrapper #terminal-container {
+    background: #30353A;
+    border-radius: 0 0 10px 10px;
+    text-align: left;
+    padding: 10px;
+    height: 360px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    box-shadow: 10px 10px 26px 2px rgba(0, 0, 0, 0.2);
+}
+
+#terminal-wrapper #terminal-container * {
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+@media screen and (max-width: 500px) {
+    #terminal-wrapper #terminal-container * {
+        font-size: 11px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    #terminal-wrapper #terminal-container {
+        height: 200px;
+    }
+}
+
+#terminal-wrapper #terminal-container h1 {
+    font-size: 16px;
+    letter-spacing: 3px;
+}
+
+#terminal-wrapper #terminal-container .terminal-output {
+    white-space: pre-wrap;
+}
+
+/* Input */
+.input-wrapper {
+    display: flex;
+}
+
+#input {
+    flex: 2;
+    border: none;
+    background: transparent;
+}
+
+#input:focus {
+    outline: none;
+}
+
+/* Output */
+#output-wrapper div {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+/* Scrollbar */
+#terminal-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+#terminal-container::-webkit-scrollbar-track {
+    background: #30353A;
+    border-radius: 0 0 10px 0;
+}
+
+#terminal-container::-webkit-scrollbar-thumb {
+    background: #4C535A;
+    border-radius: 4px;
+}
+
+#terminal-container::-webkit-scrollbar-thumb:hover {
+    background: #697178;
+}
+
+
+/*# sourceMappingURL=main.css.map*/
