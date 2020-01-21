@@ -1,7 +1,6 @@
 {
   "name": "3sq.re",
-  "version": "3.0.0",
-  "description": "",
+  "version": "4.0.0",
   "private": true,
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
